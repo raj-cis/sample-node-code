@@ -115,4 +115,18 @@ describe('POST /notifications', () => {
         done();
       });
   });
+
+  it('should be fail if add mulitple notifications for same account and same color', (done) => {
+    data = {
+      accountId: account._id,
+      name: 'test-3',
+      color: 'test-3'
+    };
+    chai.request(app).post('/notifications').send(data)
+      .then(() => {
+        expect(res).to.have.status(500);
+      }).catch(() => {
+        done();
+      });
+  });
 });
