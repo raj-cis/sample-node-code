@@ -3,12 +3,12 @@ const app = require('../app');
 const expect = chai.expect;
 
 chai.use(require('chai-http'));
-const Notification = require('../models/notifications');
-const Account = require('../models/account');
+const Notifications = require('../models/notifications');
+const Accounts = require('../models/accounts');
 let res, account, data = {};
 
 before((done) => {
-  account = new Account({
+  account = new Accounts({
     email: 'testcreate@test.com',
     name: 'Testwo',
     age: 10
@@ -23,9 +23,9 @@ before((done) => {
 });
 
 after((done) => {
-  Account.deleteMany()
+  Accounts.deleteMany()
     .then(() => {
-      Notification.deleteMany()
+      Notifications.deleteMany()
         .then((data) => {
           account = data
           done();
@@ -70,14 +70,14 @@ describe('POST /notifications', () => {
       name: 'test-2',
       color: 'test-2'
     };
-    Notification.findOne(data)
+    Notifications.findOne(data)
       .then(() => {
         chai.request(app).post('/notifications').send(data)
           .then((res) => {
             expect(res.body.data.accountId).to.equals(data.accountId.toString());
             expect(res.body.data.name).to.equals(data.name);
             expect(res.body.data.color).to.equals(data.color);
-            Notification.findOne(data)
+            Notifications.findOne(data)
               .then(() => {
                 expect(res).to.have.status(200);
                 done();
@@ -104,7 +104,7 @@ describe('POST /notifications', () => {
         expect(res.body.data.color).to.equals(data.color);
         expect(res.body.data.accountId).to.equals(data.accountId.toString());
         expect(res.body.data.name).to.equals(data.name);
-        Notification.findOne(data)
+        Notifications.findOne(data)
           .then((notification) => {
             expect(notification).to.exist;
             done();

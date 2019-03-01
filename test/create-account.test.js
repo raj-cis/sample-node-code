@@ -3,15 +3,15 @@ const expect = chai.expect;
 const app = require('../app');
 
 chai.use(require('chai-http'));
-const Account = require('../models/account');
+const Accounts = require('../models/accounts');
 let data = {};
 
 
 describe('POST /account/create', () => {
 	before((done) => {
-		Account.deleteMany()
+		Accounts.deleteMany()
 			.then(() => {
-				const account = new Account({
+				const account = new Accounts({
 					email: 'test@test.com',
 					name: 'Testwo',
 					age: 10
@@ -29,7 +29,7 @@ describe('POST /account/create', () => {
 	});
 
 	after((done) => {
-		Account.deleteMany()
+		Accounts.deleteMany()
 			.then(() => {
 				done();
 			}).catch(() => {
@@ -85,7 +85,7 @@ describe('POST /account/create', () => {
 			}).catch(() => {
 				done();
 			});
-		Account.findOne(data)
+		Accounts.findOne(data)
 			.then((account) => {
 				expect(account).to.exist;
 				done();
@@ -101,7 +101,7 @@ describe('POST /account/create', () => {
 			}).catch(() => {
 				done();
 			});
-		Account.findOne({ email: data.email })
+		Accounts.findOne({ email: data.email })
 			.then((account) => {
 				expect(account).to.exist;
 				done();

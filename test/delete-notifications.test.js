@@ -3,20 +3,20 @@ const app = require('../app');
 const expect = chai.expect;
 
 chai.use(require('chai-http'));
-const Notification = require('../models/notifications');
-const Account = require('../models/account');
+const Notifications = require('../models/notifications');
+const Accounts = require('../models/accounts');
 let res, notification, account, data = {};
 
 before((done) => {
-  Account.deleteMany()
-  account = new Account({
+  Accounts.deleteMany()
+  account = new Accounts({
     email: 'testdelete@test.com',
     name: 'Testwo',
     age: 10
   })
   account.save()
     .then(() => {
-      notification = new Notification({
+      notification = new Notifications({
         accountId: account._id,
         name: 'notification-test-name',
         color: 'notification-test-color'
@@ -34,9 +34,9 @@ before((done) => {
 });
 
 after((done) => {
-  Account.deleteMany()
+  Accounts.deleteMany()
     .then(() => {
-      Notification.deleteMany()
+      Notifications.deleteMany()
         .then(() => {
           done();
         }).catch(() => {

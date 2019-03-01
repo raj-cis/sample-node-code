@@ -6,4 +6,4 @@ const NotificationSchema = new mongoose.Schema({
 	color: { type: String, required: true },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Notification', NotificationSchema);
+module.exports = mongoose.model('Notifications', NotificationSchema);

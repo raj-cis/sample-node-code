@@ -1,4 +1,4 @@
-const Account = require('../../models/account');
+const Accounts = require('../../models/accounts');
 
 // Create and Save a new Account
 module.exports = (req, res) => {
@@ -11,7 +11,7 @@ module.exports = (req, res) => {
 	}
 
 	// Create a Account
-	const account = new Account({ email, name, age })
+	const account = new Accounts({ email, name, age })
 
 	// Save Account in the database
 	account.save()
