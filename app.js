@@ -7,11 +7,11 @@ const app = express();
 let port = 3000;
 let config = require('./config');
 mongoose.connect(config.StorageConnectionString, {
-	autoReconnect: true,
-	reconnectTries: 60,
-	reconnectInterval: 10000,
-	useCreateIndex: true,
-	useNewUrlParser: true
+  autoReconnect: true,
+  reconnectTries: 60,
+  reconnectInterval: 10000,
+  useCreateIndex: true,
+  useNewUrlParser: true
 });
 app.listen(port);
 app.use(require('body-parser').json());
